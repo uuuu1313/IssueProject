@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <header th:fragment="common">
         <section class="left">
             <a th:href="@{/}">
@@ -11,9 +11,9 @@
         <section class="right" >
             <th:block sec:authorize="isAuthenticated()"> <!-- 로그인한 상태 -->
                 <span th:text="${#messages.msg('member.login.msg', session.memberInfo.userNm,
-                session.memberInfo.userId)}"></span>
+                    session.memberInfo.userId)}"></span>
                 <a th:href="@{/member/logout}" th:text="#{member.logout}" class="sbtn carrot"></a>
-                <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}" th:text="#{adminPage}"}></a>
+                <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}" th:text="#{adminPage}" class="sbtn carrot"}></a>
             </th:block>
 
             <th:block sec:authorize="isAnonymous()">

@@ -4,8 +4,15 @@
       layout:decorate="~{layouts/front/main}">
 <main layout:fragment="content">
     <h1 th:text="${title}"></h1>
-    <form method="post" name="frmFindId" th:action=@{/member/find/id} autocomplete="off" th:object="${memberSearch}">
+    <form method="post" name="frmFindPw" th:action=@{/member/find/pw} autocomplete="off" th:object="${memberSearch}">
         <table class="table-cols">
+            <tr>
+                <th>아이디</th>
+                <td>
+                    <input type="text" th:field="*{userId}">
+                </td>
+            </tr>
+
             <tr>
                 <th>회원명</th>
                 <td>
@@ -22,7 +29,7 @@
         </table>
 
         <div class="search_btn">
-            <button type="submit">아이디 찾기</button>
+            <button type="submit">비밀번호 찾기</button>
         </div>
     </form>
 </main>
