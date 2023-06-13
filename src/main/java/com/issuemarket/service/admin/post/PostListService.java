@@ -2,6 +2,7 @@ package com.issuemarket.service.admin.post;
 
 import com.issuemarket.dto.BoardSearch;
 import com.issuemarket.entities.Post;
+import com.issuemarket.entities.QBoard;
 import com.issuemarket.entities.QPost;
 import com.issuemarket.repositories.BoardRepository;
 import com.issuemarket.repositories.PostRepository;
@@ -22,19 +23,23 @@ public class PostListService {
     private final BoardRepository boardRepository;
 
 
-    public Page<Post> gets(BoardSearch boardSearch, String category) {
+    public Page<Post> gets(BoardSearch boardSearch, String bId, String category) {
         QPost post = QPost.post;
+        QBoard board = QBoard.board;
         BooleanBuilder builder = new BooleanBuilder();
 
         int page = boardSearch.getPage();
         int pageSize = boardSearch.getPageSize();
 
         page = page < 1 ? 1 : page;
-//        pageSize = pageSize < 1 ? 20 : pageSize;
+        pageSize = pageSize < 1 ? 20 : pageSize;
 
-        pageSize = 3; // 페이지 테스트
 
         /** 분류 검색 S */
+        if (bId != null && !bId.isBlank()){
+            builder.and(board.bId.eq(bId));
+        }
+
         if (category != null && !category.isBlank()) {
             builder.and(post.category.eq(category));
         }
