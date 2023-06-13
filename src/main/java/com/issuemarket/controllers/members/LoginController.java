@@ -57,14 +57,14 @@ public class LoginController {
 
         try {
             String userId = searchService.idSearch(userNm, mobile) + "입니다.";
-            
+
             String script = String.format("Swal.fire('찾으시는 아이디는', '%s', 'success').then(function() {location.href='/member/login';})", userId);
             model.addAttribute("script", script);
 
         } catch (Exception e) {
             e.printStackTrace();
 
-            String script = String.format("Swal.fire('아이디를 찾을 수 없습니다.', '%s', 'error').then(function() {history.go(-1);})", "");
+            String script = String.format("Swal.fire('아이디를 찾을 수 없습니다.', '', 'error').then(function() {history.go(-1);})");
 
             model.addAttribute("script", script);
 
