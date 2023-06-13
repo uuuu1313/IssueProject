@@ -14,6 +14,7 @@ import com.issuemarket.exception.GuestPasswordCheckException;
 import com.issuemarket.service.admin.board.config.BoardConfigInfoService;
 import com.issuemarket.service.admin.post.*;
 import com.issuemarket.validators.post.PostFormValidator;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -44,6 +45,7 @@ public class UserBoardController {
     private final GuestPasswordCheckService guestPwCheckService;
     private final PostListService postListService;
     private final HttpSession session;
+    private final HttpServletRequest request;
 
     private Board board;
 
@@ -53,11 +55,21 @@ public class UserBoardController {
         commonProcess(bId, "list", model);
 
         Board board = boardConfigInfoService.get(bId, "list");
+        model.addAttribute("board", board);
+        model.addAttribute("category", categoryName);
 
         // 카테고리별 조회하기 **
-        Page<Post> items = postListService.gets(boardSearch, categoryName);
+        Page<Post> items = postListService.gets(boardSearch, bId, categoryName);
         model.addAttribute("postList", items.getContent());
-        
+
+        int nowPage = items.getPageable().getPageNumber() +1;
+        int startPage = Math.max(nowPage - 3, 1);
+        int endPage = Math.max(nowPage + 9, items.getTotalPages());
+
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
         return "board/list";
     }
 
