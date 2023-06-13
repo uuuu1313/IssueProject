@@ -3,9 +3,11 @@ package com.issuemarket.controllers.members;
 import com.issuemarket.dto.MemberJoin;
 import com.issuemarket.dto.MemberLogin;
 import com.issuemarket.dto.MemberSearch;
+import com.issuemarket.repositories.MemberRepository;
 import com.issuemarket.service.admin.member.MemberUpdateService;
 import com.issuemarket.service.front.member.MemberSearchService;
 import com.issuemarket.validators.member.JoinValidator;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,10 +85,19 @@ public class LoginController {
         String userId = memberSearch.getUserId();
         String userNm = memberSearch.getUserNm();
         String mobile = memberSearch.getMobile();
+        
+        try {
+            Long no = searchService.pwSearch(userId, userNm, mobile);
+            return "redirect:/member/resetpw/" + no;
 
-        Long no = searchService.pwSearch(userId, userNm, mobile);
+        } catch (Exception e) {
 
-        return "redirect:/member/resetpw/" + no;
+            String script = String.format("Swal.fire('회원을 찾을 수 없습니다.', '', 'error').then(function() {history.go(-1);})");
+
+            model.addAttribute("script", script);
+
+            return "commons/sweet_script";
+        }
     }
 
     @GetMapping("/resetpw/{no}")
@@ -111,10 +122,15 @@ public class LoginController {
             updateService.pwUpdate(no, pw);
 
         } catch (Exception e) {
-            e.printStackTrace();
+
             return "member/findpw";
         }
-        return "redirect:/member/login";
+
+        String script = String.format("Swal.fire('수정 완료!', '', 'success').then(function() {location.href='/member/login';})");
+
+        model.addAttribute("script", script);
+
+        return "commons/sweet_script";
     }
 
     private void commonProcess(Model model, String title) {

@@ -22,13 +22,13 @@ public class MemberSearch {
 
     private String userId;
 
-    @NotBlank
     private String userNm;
 
-    @NotBlank
     private String mobile;
 
     private String role;
+
+    private String status;
 
     private int page = 1;
     private int noOfRows = 20;

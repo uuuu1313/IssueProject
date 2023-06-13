@@ -3,6 +3,7 @@ package com.issuemarket.service.admin.member;
 import com.issuemarket.commons.MemberUtil;
 import com.issuemarket.commons.constants.Role;
 import com.issuemarket.dto.MemberJoin;
+import com.issuemarket.dto.MemberListForm;
 import com.issuemarket.entities.Member;
 import com.issuemarket.exception.MemberNotFoundException;
 import com.issuemarket.repositories.MemberRepository;
@@ -10,16 +11,46 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberUpdateService {
 
     private final MemberRepository repository;
     private final PasswordEncoder passwordEncoder;
-    private final MemberUtil memberUtil;
+
+
+    public void listUpdate(MemberListForm memberListForm) {
+
+        List<Long> userNos = memberListForm.getUserNo();
+        List<String> roles = memberListForm.getRoles();
+
+        for (int i = 0; i < userNos.size(); i++){
+            Long userNo = userNos.get(i);
+            Role role = Role.valueOf(roles.get(i));
+            Member member = repository.findById(userNo).orElse(null);
+            member.setRoles(role);
+
+            repository.saveAndFlush(member);
+        }
+
+//        List<Member> items = new ArrayList<>();
+//        for (int num : nums) {
+//            Long userNo = userNos.get(num);
+//            Role role = Role.valueOf(roles.get(num));
+//            Member item = repository.findById(userNo).orElse(null);
+//            if(item == null) {
+//                continue;
+//            }
+//            item.setRoles(role);
+//            items.add(item);
+//        }
+
+    }
 
     public void update(Long userNo, MemberJoin memberJoin) {
-
 
             Member member = repository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 

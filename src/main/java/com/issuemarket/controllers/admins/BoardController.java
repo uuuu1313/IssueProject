@@ -1,4 +1,4 @@
-package com.issuemarket.controllers.admins.board;
+package com.issuemarket.controllers.admins;
 
 
 import com.issuemarket.commons.MenuForm;

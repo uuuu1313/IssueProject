@@ -56,12 +56,12 @@
 
     <h2>회원 목록</h2>
 
-    <form method="post" name="frmMemList" autocomplete="off" >
+    <form method="post" name="frmMemList" autocomplete="off">
         <table class="table-rows">
             <thead>
                 <tr>
                     <th>
-                        <input type="checkbox" class="checkall" id="checkall" data-target-name="userNo">
+                        <input type="checkbox" class="checkall" id="checkall" data-target-name="num">
                         <label for="checkall"></label>
                     </th>
                     <th>회원 번호</th>
@@ -74,17 +74,21 @@
                 </tr>
             </thead>
 
-            <tbody th:each="item : ${items}" th:object="${item}">
+            <tbody th:each="item, role : ${items}" th:object="${item}">
                 <tr>
                     <td>
-                        <input type="checkbox" name="userNo" th:value="*{userNo}" th:id="*{userNo}">
-                        <label th:for="*{userNo}"></label>
+                        <span>
+                                <input type="checkbox" name="num" th:value="${role.index}" th:id="${'num_' + role.index}">
+                                <label th:for="${'num_' + role.index}"></label>
+                            </span>
+                        <input type="hidden" name="userNo" th:value="*{userNo}">
                     </td>
                     <td th:text="*{userNo}"></td>
-                    <td>
-                        <select th:name="*{'role_' + userNo}">
-                            <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
-                        </select>
+                    <td th:text="*{roles}">
+<!--                        <select name="role">-->
+<!--                            <option value="USER">회원</option>-->
+<!--                            <option value="ADMIN"> &lt;!&ndash;th:selected="*{role.toString() == 'ADMIN'}"&ndash;&gt;관리자</option>-->
+<!--                        </select>-->
                     </td>
                     <td class="mId">
                         <a th:text="*{userId}" th:href="@{/admin/member/view/{userNo}(userNo=*{userNo})}"></a>
@@ -98,7 +102,7 @@
         </table>
 
         <div class="table-action">
-            <button type="submit" class="sbtn carrot">저장하기</button>
+            <button type="submit" class="sbtn carrot" onclick="return confirm('정말 수정하시겠습니까?');">수정하기</button>
         </div>
     </form>
 </section>

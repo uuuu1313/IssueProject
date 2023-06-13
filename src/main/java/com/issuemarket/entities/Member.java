@@ -1,10 +1,8 @@
 package com.issuemarket.entities;
 
 import com.issuemarket.commons.constants.Role;
-import com.issuemarket.dto.MemberInfoRequest;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,15 +60,5 @@ public class Member extends BaseEntity {
     @Column(length = 40)
     private String socialId;
 
-
-    public void updateMember(MemberInfoRequest memberInfoRequest, PasswordEncoder passwordEncoder){
-        if(memberInfoRequest.getUserNewPw() != null){
-            String encodedPassword = memberInfoRequest.getUserNewPw();
-            this.userPw = passwordEncoder.encode(memberInfoRequest.getUserNewPw());
-        }
-        this.userNm = memberInfoRequest.getUserNm();
-        this.userNick = memberInfoRequest.getUserNick();
-        this.mobile = memberInfoRequest.getMobile();
-    }
 
 }

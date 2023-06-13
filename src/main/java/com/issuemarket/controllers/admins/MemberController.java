@@ -1,7 +1,8 @@
-package com.issuemarket.controllers.admins.member;
+package com.issuemarket.controllers.admins;
 
 import com.issuemarket.commons.constants.Role;
 import com.issuemarket.dto.MemberJoin;
+import com.issuemarket.dto.MemberListForm;
 import com.issuemarket.dto.MemberSearch;
 import com.issuemarket.entities.Member;
 import com.issuemarket.exception.CommonException;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Controller("adminMemberController")
 @RequestMapping("/admin/member")
@@ -28,38 +30,42 @@ public class MemberController {
     private final MemberListService listService;
     private final MemberRepository memberRepository;
     private final MemberDeleteService deleteService;
-    private final HttpServletResponse response;
     private final MemberUpdateService updateService;
 
     @GetMapping
     public String list(@ModelAttribute MemberSearch search, Model model) {
         commonProcess(model, "회원관리");
 
-        Page<Member> members = listService.gets(search);
-        model.addAttribute("items", members.getContent());
+        Page<Member> data = listService.gets(search);
+        List<Member> items =data.getContent();
+        model.addAttribute("items", items);
 
-        String[] roles = Arrays.stream(Role.values()).map(r->r.toString()).toArray(String[]::new);
-        model.addAttribute("roles", roles);
+//        String[] roles = Arrays.stream(Role.values()).map(r->r.toString()).toArray(String[]::new);
+//        model.addAttribute("roles", roles);
 
         return "admin/member/index";
     }
 
     @PostMapping
-    public String listPs(@ModelAttribute Member member, Model model) {
+    public String listPs(@ModelAttribute MemberListForm listForm, Model model) {
         commonProcess(model, "회원 관리");
 
-        member = listService.get(member.getUserNo());
-        String updateRole = String.valueOf(member.getRoles());
-
-        member.setRoles(Role.valueOf(updateRole));
-
-        memberRepository.saveAndFlush(member);
-        System.out.println("After member " + member);
 
 
-        return "redirect:/admin/member";
+        try {
+            updateService.listUpdate(listForm);
+            String script = String.format("Swal.fire('수정 완료!', '', 'success').then(function() {location.reload();})");
+            model.addAttribute("script", script);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            String script = String.format("Swal.fire('수정할 회원을 선택해주세요!', '', 'error').then(function() {history.go(-1);})");
+            model.addAttribute("script", script);
+
+            return "commons/sweet_script";
+        }
+        return "commons/sweet_script";
     }
-
 
     @GetMapping("/view/{userNo}")
     public String view(@PathVariable Long userNo, Model model) {
@@ -81,8 +87,6 @@ public class MemberController {
         return "redirect:/admin/member";
     }
 
-
-
     @GetMapping("/delete/{userNo}")
     public String delete(@PathVariable Long userNo) {
         Member member = listService.get(userNo);
@@ -96,19 +100,5 @@ public class MemberController {
         model.addAttribute("pageTitle", title);
         model.addAttribute("title", title);
         model.addAttribute("menuCode", "member");
-    }
-
-    @ExceptionHandler(CommonException.class)
-    public String errorHandler(CommonException e, Model model) {
-        e.printStackTrace();
-
-        String message = e.getMessage();
-        HttpStatus status = e.getStatus();
-        response.setStatus(status.value());
-
-        String script = String.format("alert('%s');history.back();", message);
-        model.addAttribute("script", script);
-
-        return "commons/execute_script";
     }
 }

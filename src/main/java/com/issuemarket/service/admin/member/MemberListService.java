@@ -68,10 +68,6 @@ public class MemberListService {
                 }
             }
 
-
-
-
-
             if (sDate != null) {
                 builder.and(member.createdAt.goe(sDate.atStartOfDay()));
             }

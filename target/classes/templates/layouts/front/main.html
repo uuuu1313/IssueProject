@@ -22,39 +22,38 @@
         <script th:each="jsFile : ${addScript}"
                 th:src="@{/js/front/{jsFile}.js?v={v}(jsFile=${jsFile}, v=${@siteConf.get('cssJsVersion')})}"></script>
         <th:block layout:fragment="addScript"></th:block>
-
     </head>
+
     <body>
         <header th:replace="~{outlines/front/header::common}"></header>
         <div th:replace="~{outlines/front/headerbar::navbar}"></div>
         <div class="main_inner">
             <main class="container">
-        <main layout:fragment="content" class="left_content"></main>
-        <section class="right_content">
-            <div>
-                <div class="login_box">
-                    <div class="user_info">
-                        <th:block sec:authorize="isAuthenticated()"> <!-- 로그인한 상태 -->
-                            <span th:text="${#messages.msg('member.login.msg', session.memberInfo.userNm,
-                session.memberInfo.userId)}"></span>
-                        </th:block>
-                        <th:block sec:authorize="isAnonymous()">
-                            <a th:href="@{/member/login}" th:text="#{member.login.view}"></a>
-                        </th:block>
+            <main layout:fragment="content" class="left_content"></main>
+                <section class="right_content">
+                    <div>
+                        <div class="login_box">
+                            <div class="user_info">
+                                <th:block sec:authorize="isAuthenticated()"> <!-- 로그인한 상태 -->
+                                    <span th:text="${#messages.msg('member.login.msg', session.memberInfo.userNm, session.memberInfo.userId)}"></span>
+                                </th:block>
+                                <th:block sec:authorize="isAnonymous()">
+                                    <a th:href="@{/member/login}" th:text="#{member.login.view}"></a>
+                                </th:block>
+                            </div>
+                            <div class="user_option">
+                                <span>
+                                       <i class="xi-home-o"></i>
+                                    <a th:text="#{member.mypage}" th:href="@{/member/mypage}"></a>
+                                </span>
+                                <span>
+                                    <i class="xi-star-o"></i>
+                                    <a th:text="#{member.bookmark}" href="#"></a>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="user_option">
-                        <span>
-                               <i class="xi-home-o"></i>
-                            <a th:text="#{member.mypage}" href="#"></a>
-                        </span>
-                        <span>
-                            <i class="xi-star-o"></i>
-                            <a th:text="#{member.bookmark}" href="#"></a>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section>
+                </section>
             </main>
         </div>
 
