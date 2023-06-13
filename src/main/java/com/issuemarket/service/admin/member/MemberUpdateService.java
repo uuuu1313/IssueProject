@@ -20,7 +20,7 @@ public class MemberUpdateService {
 
     public void update(Long userNo, MemberJoin memberJoin) {
 
-        if (memberUtil.isAdmin()) {
+
             Member member = repository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 
             String nick = memberJoin.getUserNick();
@@ -35,7 +35,6 @@ public class MemberUpdateService {
             member.setRoles(Role.valueOf(role));
 
             repository.saveAndFlush(member);
-        }
     }
 
     public void pwUpdate(Long no, String pw) {

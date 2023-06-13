@@ -48,13 +48,15 @@ public class MemberController {
     public String listPs(@ModelAttribute Member member, Model model) {
         commonProcess(model, "회원 관리");
 
-        String updateRole = String.valueOf(member.getRoles());
         member = listService.get(member.getUserNo());
+        String updateRole = String.valueOf(member.getRoles());
 
         member.setRoles(Role.valueOf(updateRole));
 
         memberRepository.saveAndFlush(member);
         System.out.println("After member " + member);
+
+
         return "redirect:/admin/member";
     }
 

@@ -52,6 +52,9 @@ public class SecurityConfig {
                     }
                 });
 
+        http.csrf().ignoringRequestMatchers(new AntPathRequestMatcher("/member/resetpw/**"))
+                .ignoringRequestMatchers(new AntPathRequestMatcher("/admin/member/**"));
+
         http.headers().frameOptions().sameOrigin();
 
         return http.build();

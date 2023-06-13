@@ -1,5 +1,6 @@
 package com.issuemarket.service.admin.member;
 
+import com.issuemarket.commons.constants.Role;
 import com.issuemarket.dto.MemberSearch;
 import com.issuemarket.entities.Member;
 import com.issuemarket.entities.QMember;
@@ -33,6 +34,7 @@ public class MemberListService {
 
         String sopt = search.getSopt();
         String skey = search.getSkey();
+        String role = search.getRole();
 
         if (search != null) {
             LocalDate sDate = search.getSDate();
@@ -57,6 +59,18 @@ public class MemberListService {
                     builder.and(member.mobile.contains(skey));
                 }
             }
+
+            if (role != null) {
+                if (role.equals("USER")) {
+                    builder.and(member.roles.eq(Role.valueOf(role)));
+                } else if (role.equals("ADMIN")) {
+                    builder.and(member.roles.eq(Role.valueOf(role)));
+                }
+            }
+
+
+
+
 
             if (sDate != null) {
                 builder.and(member.createdAt.goe(sDate.atStartOfDay()));

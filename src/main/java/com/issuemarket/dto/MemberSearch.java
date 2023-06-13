@@ -28,7 +28,7 @@ public class MemberSearch {
     @NotBlank
     private String mobile;
 
-    private Role role;
+    private String role;
 
     private int page = 1;
     private int noOfRows = 20;

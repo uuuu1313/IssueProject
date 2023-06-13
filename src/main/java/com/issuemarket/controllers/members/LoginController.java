@@ -3,11 +3,9 @@ package com.issuemarket.controllers.members;
 import com.issuemarket.dto.MemberJoin;
 import com.issuemarket.dto.MemberLogin;
 import com.issuemarket.dto.MemberSearch;
-import com.issuemarket.repositories.MemberRepository;
 import com.issuemarket.service.admin.member.MemberUpdateService;
 import com.issuemarket.service.front.member.MemberSearchService;
 import com.issuemarket.validators.member.JoinValidator;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final MemberRepository repository;
-    private final HttpServletRequest request;
     private final MemberSearchService searchService;
     private final JoinValidator joinValidator;
     private final MemberUpdateService updateService;
@@ -103,11 +99,7 @@ public class LoginController {
     @PostMapping("/resetpw/{no}")
     public String resetPwPs(@PathVariable Long no, @ModelAttribute MemberJoin memberJoin, Errors errors, Model model) {
 
-        System.out.println("pwwwwww : " + no);
-
         String pw = memberJoin.getUserPw();
-
-        System.out.println("pwwwwww : " + pw);
 
         try {
             joinValidator.validate(memberJoin, errors);

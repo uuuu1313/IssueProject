@@ -15,6 +15,21 @@
                     <input type="date" name="eDate" th:field="*{eDate}" style="width: 20%">
                 </td>
             </tr>
+
+            <tr>
+                <th>권한 선택</th>
+                <td>
+                    <input type="radio" th:field="*{role}" value="ALL" id="role_ALL">
+                    <label for="role_ALL">전체</label>
+
+                    <input type="radio" th:field="*{role}" value="USER" id="role_USER">
+                    <label for="role_USER">USER</label>
+
+                    <input type="radio" th:field="*{role}" value="ADMIN" id="role_ADMIN">
+                    <label for="role_ADMIN">ADMIN</label>
+                </td>
+            </tr>
+
             <tr>
                 <th>검색어</th>
                 <td>
@@ -30,6 +45,7 @@
                     </div>
                 </td>
             </tr>
+
         </table>
 
         <div class="search_btn">
@@ -40,7 +56,7 @@
 
     <h2>회원 목록</h2>
 
-    <form method="post" th:action="@{/admin/member}" name="frmMemList" autocomplete="off" target="ifrmProcess">
+    <form method="post" name="frmMemList" autocomplete="off" >
         <table class="table-rows">
             <thead>
                 <tr>
