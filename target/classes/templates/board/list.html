@@ -32,9 +32,25 @@
     </table>
     </form>
 
+    <div class="write_box">
+        <div class="r_btn">
+            <a class="sbtn carrot" th:href="@{/board/write/{bId}(bId=${board.bId})}">글쓰기</a>
+        </div>
+    </div>
+
+    <div class="paging_wrap">
+        <div class="paging_box">
+            <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+                <a th:if="${page != nowPage}"
+                   th:href="@{/board/list/{bId}?category={category}&page={page}(bId=${board.bId}, category=${category}, page=${page})}" th:text="${page}"></a>
+                <strong th:if="${page == nowPage}" th:text="${page}" style="color: red"></strong>
+            </th:block>
+        </div>
+    </div>
+
     <form name="frmSearch" method="get" th:object="${boardSearch}">
-        <div class="search_btn_wrap">
-            <div class="search_grp">
+        <div class="sch_btn_wrap">
+            <div class="sch_grp">
                 <select name="sopt">
                     <option value="subject_content">제목+내용</option>
                     <option value="subject">제목</option>
@@ -42,11 +58,11 @@
                     <option value="poster">글쓴이</option>
                 </select>
             </div>
-            <div class="search_box">
-                <div class="search_bar">
+            <div class="sch_box">
+                <div class="sch_bar">
                 <input type="text" name="skey" placeholder="검색어 입력">
                 </div>
-                <button class="search_btn" type="submit">
+                <button class="sch_btn" type="submit">
                     <i class="xi-search"></i>
                 </button>
             </div>

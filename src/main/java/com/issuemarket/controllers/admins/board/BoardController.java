@@ -40,7 +40,7 @@ public class BoardController {
 
         Page<Board> boards = boardConfigListService.gets(boardSearch);
         model.addAttribute("items", boards.getContent());
-
+        
         return "admin/board/index";
     }
 
