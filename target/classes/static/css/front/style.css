@@ -1,0 +1,108 @@
+/** 사이트 공통 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+::-webkit-scrollbar {  width: 5px; height: 5px; }
+::-webkit-scrollbar-thumb { background: #FFB98B; border-radius: 3px; }
+* { box-sizing: border-box; outline: none; font-family: 'Nanum Gothic', sans-serif; }
+html { font-size: 13px; color: #222; }
+body { margin: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+li { display: block; }
+dl { display: flex; width: 100%; margin: 0; align-items: center; }
+dt { width: 130px;  }
+dd { width: calc(100% - 130px); padding: 0; margin: 0; }
+a { color:#222; text-decoration: none; }
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"] { border: 1px solid #d5d5d5; height: 35px; width: 100%; padding: 0 20px; }
+input[type="date"] { height: 35px; border: 1px solid #d5d5d5; padding: 0 20px; }
+textarea { border: 1px solid #d5d5d5; width: 100%; resize: none; padding: 20px; min-height: 100px; }
+select { height: 36px; border: 1px solid #d5d5d5; background: #fff; min-width: 128px; }
+
+/** 기준 너비 */
+.layout_width { max-width: 1300px; min-width: 1100px; margin: 0 auto; padding: 0 10px; }
+
+input[type='checkbox'] { display: none; }
+input[type='checkbox']+label { min-height: 32px; line-height: 1; padding: 8px 0 8px 33px; background: url("../../images/chk-off.png") no-repeat left center; }
+input[type='checkbox']:checked+label { background: url("../../images/chk-on.png") no-repeat left center; }
+
+input[type='radio'] { display: none; }
+input[type='radio']+label { min-height: 24px; line-height: 1; padding: 3px 0 3px 25px; background: url("../../images/radio-off.png") no-repeat left center; }
+input[type='radio']:checked+label { background: url("../../images/radio-on.png") no-repeat left center; }
+
+input:read-only, textarea:read-only { background-color: #f8f8f8; }
+select option:disabled { color: red; background-color: #f8f8f8; }
+
+.dn { display: none !important; }
+
+/** 기본 레이아웃 스타일 */
+header { height: 80px; background: #fff; display: flex; align-items: center; }
+header > .left { width: 208px; text-align: center; }
+header > .right { flex-grow: 1; text-align: right; padding: 10px; }
+
+aside li > a { display: block; height: 71px; line-height: 71px; border-top: 1px solid #FFB98B; color: #fff;
+ font-size: 18px; text-align: center; position: relative; }
+aside li > a * { color: #fff; font-size: 18px; }
+aside li > a:hover,
+aside li > a.on { background: #FF7E36; font-weight: bold; }
+aside li > a:hover:after,
+aside li > a.on:after { content: ''; display: block; position: absolute; width: 8px; height: 100%;
+ right: 0; top: 0; background: #00d0d7; }
+
+/** 기본 버튼 스타일 */
+.sbtn { display: inline-block; border: 1px solid #FF7E36; color: #FF7E36; min-width: 90px; padding: 0 20px; height: 28px; line-height: 26px; text-align: center; border-radius: 5px; background: #fff; }
+.sbtn.carrot { color: #fff; background: #FF7E36; }
+.sbtn.carrot.member { color: #fff; background: #FF7E36; width: 100% }
+
+.search_btn { text-align: center; margin: 20px 0 35px; }
+.search_btn button { text-align: center; height: 45px; line-height: 45px; background: #fff; color: #FF7E36; padding: 0 30px; border: 1px solid #FF7E36; font-size: 16px; cursor:pointer; border-bottom-left-radius: 20px; border-top-right-radius: 20px; }
+.search_btn button:hover { font-weight: bold; text-decoration: underline; }
+
+/** 에러 메세지 스타일 */
+.errors { box-shadow: 2px 2px 5px #36466d; padding: 5px 15px; background: #fff; font-size: 12px; border-radius: 3px; margin-top: 5px; color: #61729e; }
+
+/** 폼 메뉴 */
+.memberM { display: flex; justify-content: center; margin: 30px 0; }
+.memberM div { margin: 15px 0; }
+
+/** header menuBar */
+.head_bar { background: #FFB98B; min-width: 1000px; border: 1px solid #FF7E36;  border-width: 1px 0;  align-items: center; }
+.head_bar > .menu_bar { width: 1000px; height: 45px; margin: 0 auto; display:flex; justify-content: space-between;
+ align-items: center; }
+.head_bar > .menu_bar > .menu_bar_list { float: left; width: 1000px; height: 100%; align-items: center; }
+.head_bar > .menu_bar > .menu_bar_list > li { position:relative; float: left; margin-left: 30px; height: 100%; display: inline-flex; align-items: center;  }
+.menu_bar_list > li > a { display: block; position:relative; font-size: 15px; }
+.menu_bar_list > li:hover > a ,
+.menu_bar_list > li.on > a { font-weight: bold; }
+
+.menu_bar_list .sub_list { background: #FFB98B; width: 0; overflow: hidden; transition: all 1s; opacity: 0; transition-timing-function: ease;
+ position: absolute; top: 45px; z-index: 10; }
+.menu_bar_list > li:hover .sub_list { min-width: 100px; width: auto; opacity: 1; transition: all 0.6s; transition-timing-function: ease; }
+.menu_bar_list .sub_list li a { display: block; padding: 10px; border-bottom: 1px solid #f8f8f8; }
+
+/** 기본 테이블 */
+.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
+.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; }
+.table-cols td { background: #fff; padding: 10px 15px; }
+.table-cols th,
+.table-cols td { border-bottom: 1px solid #d5d5d5; }
+
+.table-rows { width: 100%; border-spacing: 0; padding: 0; }
+.table-rows th { background: #7a7c89; color: #fff; border-top: 1px solid #d5d5d5; padding: 12px 10px; }
+.table-rows td { padding: 15px 10px; text-align: center; }
+.table-rows th, .table-rows td { border-bottom: 1px solid #d5d5d5; border-right: 1px solid #d5d5d5; }
+.table-rows th:first-of-type, .table-rows td: first-of-type { border-left: 1px solid #d5d5d5; }
+
+.table-action { padding: 10px 0; border-bottom: 1px solid #d5d5d5; }
+
+/** 메인 프론트 */
+.main_inner { position: relative; margin: 0 auto; width: 1450px; }
+.container { width: 1140px; margin: 20px auto 0; }
+.left_content { width: 840px; float: left; }
+.right_content { float: right; width: 300px; }
+.login_box { position: relative; margin-bottom: 15px; border: 1px solid #FFB98B; background: #fff;}
+.user_info { padding: 0 18px; height: 43px; line-height: 44px; font-size: 14px; color: #FFB98B; }
+.user_info > a { color: #FF7E36; font-weight: bold; }
+.user_option { height: 36px; line-height: 36px; background: #f3f3f3; text-align: center; clear: both; }
+
+footer { clear: both; position: relative; padding-bottom: 50px; background: #fff;}

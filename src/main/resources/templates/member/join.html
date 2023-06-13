@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/front/basicmain}">
+
+    <main layout:fragment="basic_content">
+        <div class="memberM">
+            <form method="post" name="frmJoin" th:action="@{/member/join}" th:object="${memberJoin}" autocomplete="off" style="width: 25%;">
+                <th:block th:if="${session.kakao != null}">
+                    <input type="hidden" name="socialChannel" value="kakao">
+                    <dl>
+                        <dt></dt>
+                        <dd>카카오 계정으로 회원가입</dd>
+                    </dl>
+                </th:block>
+                <h1 style="text-align: center;" th:text="${pageTitle}"></h1>
+
+                <div>
+                    <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{userId}">
+                    <div class="errors" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
+                </div>
+
+                <div th:if="${session.kakao == null}">
+                    <input type="password" name="userPw" th:field="*{userPw}" th:placeholder="#{userPw}">
+                    <div class="errors" th:each="err : ${#fields.errors('userPw')}" th:text="${err}"></div>
+                </div>
+
+                <div th:if="${session.kakao == null}">
+                    <input type="password" name="userPwRe" th:field="*{userPwRe}" th:placeholder="#{userPwRe}">
+                    <div class="errors" th:each="err : ${#fields.errors('userPwRe')}" th:text="${err}"></div>
+                </div>
+
+                <div>
+                    <input type="text" name="userNm" th:field="*{userNm}" th:placeholder="#{userNm}">
+                    <div class="errors" th:each="err : ${#fields.errors('userNm')}" th:text="${err}"></div>
+                </div>
+
+                <div>
+                    <input type="text" name="userNick" th:field="*{userNick}" placeholder="닉네임 미입력시 이름으로 들어가용!">
+                    <div class="errors" th:each="err : ${#fields.errors('userNick')}" th:text="${err}"></div>
+                </div>
+
+                <div>
+                    <input type="text" name="mobile" th:field="*{mobile}" th:placeholder="#{mobile}">
+                    <div class="errors" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+                </div>
+
+                <div>
+                    <input type="text" name="zipcode" id="zipcode1" th:field="*{zipcode}" readonly>
+                    <button type="button" class="search_address" data-address-id="address1" data-zipcode-id="zipcode1">주소 찾기</button>
+
+                    <input type="text" name="address" id="address1" th:field="*{address}" readonly>
+                    <input type="text" name="addressSub" th:field="*{addressSub}">
+                </div>
+
+                <div>
+                    <textarea th:text="${@siteConf.get('joinTerms')}" readonly>
+                    </textarea>
+                </div>
+                <div>
+                    <div class="terms"></div>
+                    <input type="checkbox" name="agrees" value="true" id="agrees">
+                    <label for="agrees" th:text="#{terms.agree}"></label>
+                    <div class="errors" th:each="err : ${#fields.errors('agrees')}" th:text="${err}"></div>
+                </div>
+
+                <button type="submit" th:text="#{member.action.join}" class="sbtn carrot member"></button>
+            </form>
+        </div>
+    </main>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin/main}">
+<section layout:fragment="content">
+<!--    <h1 th:text="${title}"></h1>-->
+
+    <h2>회원 검색</h2>
+    <form method="get" name="frmSearch" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}">
+        <table class="table-cols">
+            <tr>
+                <th>가입 날짜 검색</th>
+                <td>
+                    <input type="date" name="sDate" th:field="*{sDate}" style="width: 20%"> ~
+                    <input type="date" name="eDate" th:field="*{eDate}" style="width: 20%">
+                </td>
+            </tr>
+            <tr>
+                <th>검색어</th>
+                <td>
+                    <div class="input_grp">
+                        <select name="sopt" th:field="*{sopt}">
+                            <option value="all">통합검색</option>
+                            <option value="userId">아이디 검색</option>
+                            <option value="userNm">회원명 검색</option>
+                            <option value="userNick">닉네임 검색</option>
+                            <option value="mobile">핸드폰 번호 검색</option>
+                        </select>
+                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색어를 입력해주세요" style="margin-left: 16px; width: 70%; height: 35px;">
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="search_btn">
+            <button type="submit">조회하기</button>
+        </div>
+
+    </form>
+
+    <h2>회원 목록</h2>
+
+    <form method="post" th:action="@{/admin/member}" name="frmMemList" autocomplete="off" target="ifrmProcess">
+        <table class="table-rows">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" class="checkall" id="checkall" data-target-name="userNo">
+                        <label for="checkall"></label>
+                    </th>
+                    <th>회원 번호</th>
+                    <th>권한</th>
+                    <th>아이디</th>
+                    <th>회원명</th>
+                    <th>닉네임</th>
+                    <th>핸드폰 번호</th>
+                    <th>가입 날짜</th>
+                </tr>
+            </thead>
+
+            <tbody th:each="item : ${items}" th:object="${item}">
+                <tr>
+                    <td>
+                        <input type="checkbox" name="userNo" th:value="*{userNo}" th:id="*{userNo}">
+                        <label th:for="*{userNo}"></label>
+                    </td>
+                    <td th:text="*{userNo}"></td>
+                    <td>
+                        <select th:name="*{'role_' + userNo}">
+                            <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
+                        </select>
+                    </td>
+                    <td class="mId">
+                        <a th:text="*{userId}" th:href="@{/admin/member/view/{userNo}(userNo=*{userNo})}"></a>
+                    </td>
+                    <td th:text="*{userNm}"></td>
+                    <td th:text="*{userNick}"></td>
+                    <td th:text="*{mobile}"></td>
+                    <td th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd')}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="table-action">
+            <button type="submit" class="sbtn carrot">저장하기</button>
+        </div>
+    </form>
+</section>
+</html>

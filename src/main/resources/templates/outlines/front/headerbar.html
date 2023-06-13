@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="navbar" class="head_bar">
+        <nav class="menu_bar" >
+            <ul class="menu_bar_list">
+                <li th:each="board : ${boards}" th:object="${board}">
+                    <a th:href="@{/board/list/{bid}(bid=${board.getBId()})}" th:text="*{bName}">Board1</a>
+                    <ul class="sub_list">
+                        <li th:each="category : ${board.getCategories()}">
+                            <a th:href="@{/board/list/{bid}?category={cate}(bid=${board.getBId()}, cate=${category})}" th:text="${category}">Board1_1</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</html>

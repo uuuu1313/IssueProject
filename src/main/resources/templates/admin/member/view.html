@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/admin/main}">
+    <section layout:fragment="content" th:object="${member}">
+        <h1>
+            [[${title}]]([[*{userId}]])
+        </h1>
+        <form method="post" name="frmMemberDetail" th:action="@{/admin/member/view/{userNo}(userNo=*{userNo})}" autocomplete="off">
+            <table class="table-cols">
+                <tr>
+                    <th>회원번호</th>
+                    <td th:text="*{userNo}"></td>
+                </tr>
+
+                <tr>
+                    <th>아이디</th>
+                    <td th:text="*{userId}"></td>
+                </tr>
+
+                <tr>
+                    <th>회원명</th>
+                    <td th:text="*{userNm}"></td>
+                </tr>
+
+                <tr>
+                    <th>닉네임</th>
+                    <td>
+                        <input type="text" th:field="*{userNick}">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>핸드폰 번호</th>
+                    <td th:text="*{mobile}"></td>
+                </tr>
+
+                <tr>
+                    <th>가입 날짜</th>
+                    <td th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd')}"></td>
+                </tr>
+
+            </table>
+
+            <div class="search_btn">
+                <button type="submit">수정하기</button>
+                <button type="button">
+                    <a onclick="return confirm('정말 탈퇴 처리 하시겠습니까?');" th:href="@{/admin/member/delete/{userNo}(userNo=*{userNo})}" th:text="#{member.delete}"></a>
+                </button>
+            </div>
+        </form>
+    </section>
+</html>

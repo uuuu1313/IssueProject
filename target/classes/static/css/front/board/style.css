@@ -1,0 +1,18 @@
+/** 게시글 리스트 */
+.table-list { width: 100%; border-spacing: 0; padding: 0; margin-bottom: 20px; border-bottom: 1px solid #FF7E36; }
+.table-list th { height: 37px; border-width: 2px 0 1px; border-style: solid;
+ border-color: #FF7E36; vertical-align: middle; text-align: center; color: #333;}
+.table-list td { height: 25px; vertical-align: middle; text-align: center; color: #333; }
+.list_num { font-size: 11px; padding-top: 1px; }
+.list_subject { position: relative; text-align: left; font-size: 13px; cursor: pointer; }
+.table-list th { border-bottom: 1px solid #FFB98B; }
+.table-list td { border-bottom: 1px solid #d5d5d5; height: 27px; }
+
+/** 게시글 검색 */
+.search_btn_wrap { position: relative; width: 451px; margin: 20px auto 0; }
+.search_grp { width: 131px; height: 39px; border: 1.5px solid #FF7E36; background: #FF7E36; }
+.search_box { position: absolute; right: 0; top: 0; height: 39px; margin-left: 5px; border: 1px solid #FFB98B;
+ background: #FF7E36; float: left; }
+.search_bar { margin: 1px; width: 278px; float: left;  }
+.search_btn { width: 37px; height: 37px; background: #FFB98B; }
+.search_btn > i { background: #FFB98B; font-size: 18px; }
