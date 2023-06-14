@@ -4,9 +4,10 @@
  border-color: #FF7E36; vertical-align: middle; text-align: center; color: #333;}
 .table-list td { height: 25px; vertical-align: middle; text-align: center; color: #333; }
 .list_num { font-size: 11px; padding-top: 1px; }
-.list_subject { position: relative; text-align: left; font-size: 13px; cursor: pointer; }
+#list_subject { position: relative; text-align: left; font-size: 13px; cursor: pointer; padding-left: 10px; }
 .table-list th { border-bottom: 1px solid #FFB98B; }
 .table-list td { border-bottom: 1px solid #d5d5d5; height: 33px; }
+#list_subject > a:hover { text-decoration: underline; }
 
 /** 게시글 검색 */
 .sch_btn_wrap { position: relative; width: 451px; margin: 20px auto 0; }

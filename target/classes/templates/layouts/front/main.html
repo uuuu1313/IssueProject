@@ -11,6 +11,11 @@
             <th:block th:text="${@siteConf.get('siteTitle')}"></th:block>
         </title>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Noto+Sans+KR:wght@300;400;500;700&family=Single+Day&display=swap" rel="stylesheet">
+
+
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
         <link rel="stylesheet" type="text/css" th:href="@{/css/front/style.css?v={v}(v=${@siteConf.get('cssJsVersion')})}">
         <link rel="stylesheet" type="text/css" th:each="file : ${addCss}"
