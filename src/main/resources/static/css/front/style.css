@@ -106,3 +106,24 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 .user_option { height: 36px; line-height: 36px; background: #f3f3f3; text-align: center; clear: both; }
 
 footer { clear: both; position: relative; padding-bottom: 50px; background: #fff;}
+
+/** 메인 탑 */
+.home_top { display: flex; flex-flow: row wrap; justify-content: space-between; }
+.top_list { margin-top: 10px; width: 100%; display: flex; flex-flow: row wrap; justify-content: space-between; }
+.today_issue { width: 395px; }
+.issue_list { width: 100%; padding: 8px 12px 8px 17px; border-top: 2px solid #639cea; border-bottom: 2px solid #d1d2d4;
+ box-sizing: border-box; display: flex; flex-flow: row wrap; align-items: center; }
+.issue_list > li { margin-right: 30px; text-align: center; font-family: 'Single Day', cursive; font-size: 20px;
+ font-weight: bold; color: #e52f2f; }
+.issue_content_area { display: block !important;}
+.issue_content { padding: 0 1px; }
+.issue_hot > li { border-bottom: 1px solid #e1e1e1; background-color: #fdf0f0; }
+.issue_recom > li { border-bottom: 1px solid #e1e1e1; background-color: #f0f4fa; }
+.issue_contenst_list > li { position: relative; height: 30px; padding-left: 15px; border-bottom: 1px dotted #b1b1b1;
+ display: flex; flex-flow: row wrap; align-items: center; }
+
+.issue_hot li, .issue_recom li, .issue_content_list li { position: relative; height: 30px; padding-left: 15px;
+border-bottom: 1px dotted #b1b1b1; display: flex; flex-flow: row wrap; align-items: center; }
+
+.issue_content > ul > li > a { width: auto; max-width: 325px; display: inline-block; color: #4e4c4c; font-size: 13px;
+ font-weight: bold; text-decoration: none; vertical-align: middle; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }

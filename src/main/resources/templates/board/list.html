@@ -6,8 +6,7 @@
 <main layout:fragment="content">
     <form method="post">
     <th:block th:replace="~{board/form/_board_title::title}"></th:block>
-    게시글 리스트 테스트
-    <h1 th:text="${test}"></h1>
+
     <table class="table-list">
         <thead>
         <tr>
@@ -21,11 +20,15 @@
         </thead>
         <tbody>
         <tr th:each="item : ${postList}" th:object="${item}">
-            <td class="list_num" th:text="*{id}"></td>
-            <td class="list_subject" th:text="|[*{#strings.substring(category,0,2)}]*{subject}|"></td>
-            <td class="list_poster" th:text="*{poster}"></td>
-            <td class="list_num" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd')}">작성일 테스트</td>
-            <td class="list_num" th:text="*{hit}"></td>
+            <td class="list_num" th:text="*{id}" style="width: 8%;"></td>
+            <td id="list_subject" style="width: 45%;">
+                <a th:href="@{/board/view/{id}(id=*{id})}">
+                    [[|[*{#strings.substring(category,0,2)}]*{subject}|]]
+                </a>
+            </td>
+            <td class="list_poster" th:text="*{poster}" style="width: 21%;"></td>
+            <td class="list_num" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd')}" style="width: 10%;">작성일 테스트</td>
+            <td class="list_num" th:text="*{hit}" style="width: 10%;"></td>
             <td class="list_num">1</td>
         </tr>
         </tbody>
