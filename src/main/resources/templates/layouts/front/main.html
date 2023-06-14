@@ -15,13 +15,13 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Noto+Sans+KR:wght@300;400;500;700&family=Single+Day&display=swap" rel="stylesheet">
 
-
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
         <link rel="stylesheet" type="text/css" th:href="@{/css/front/style.css?v={v}(v=${@siteConf.get('cssJsVersion')})}">
         <link rel="stylesheet" type="text/css" th:each="file : ${addCss}"
               th:href="@{/css/front/{cssFile}.css?v={v}(cssFile=${file}, v=${@siteConf.get('cssJsVersion')})}">
         <th:block layout:fragment="addCss"></th:block>
 
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script th:src="@{/js/front/common.js?v={v}(v=${@siteConf.get('cssJsVersion')})}"></script>
         <script th:each="jsFile : ${addScript}"
@@ -42,19 +42,54 @@
                                 <th:block sec:authorize="isAuthenticated()"> <!-- 로그인한 상태 -->
                                     <span th:text="${#messages.msg('member.login.msg', session.memberInfo.userNm, session.memberInfo.userId)}"></span>
                                 </th:block>
-                                <th:block sec:authorize="isAnonymous()">
-                                    <a th:href="@{/member/login}" th:text="#{member.login.view}"></a>
+                                <th:block sec:authorize="isAnonymous()">  <!-- 미로그인한 상태 -->
+                                    <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
+                                        <div>
+                                            <input type="text" name="userId" th:placeholder="#{userId}" th:value="${mainId}">
+                                        </div>
+
+                                        <div>
+                                            <input type="password" name="userPw" th:placeholder="#{userPw}"th:value="${mainPw}">
+                                        </div>
+
+                                        <button type="submit" th:text="#{member.login}" class="sbtn carrot member"></button>
+                                    </form>
                                 </th:block>
                             </div>
                             <div class="user_option">
-                                <span>
-                                       <i class="xi-home-o"></i>
-                                    <a th:text="#{member.mypage}" th:href="@{/member/mypage}"></a>
-                                </span>
-                                <span>
-                                    <i class="xi-star-o"></i>
-                                    <a th:text="#{member.bookmark}" href="#"></a>
-                                </span>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <span>
+                                        <i class="xi-home-o"></i>
+                                        <a th:text="#{member.mypage}" th:href="@{/member/mypage/info/{userNo}(userNo=${mypageuno})}"></a>
+                                    </span>
+                                    <span>
+                                        <i class="xi-star-o"></i>
+                                        <a th:text="#{member.bookmark}" href="#"></a>
+                                    </span>
+                                </th:block>
+
+                                <th:block  sec:authorize="isAnonymous()">
+                                    <span>
+                                        <a th:href="@{/member/find/id}">
+                                            <i class="xi-search"></i>
+                                            [[#{findId}]] |
+                                        </a>
+                                    </span>
+
+                                    <span>
+                                        <a th:href="@{/member/find/pw}">
+                                            <i class="xi-search"></i>
+                                            [[#{findPw}]] |
+                                        </a>
+                                    </span>
+
+                                    <span>
+                                        <a th:href="@{/member/join}">
+                                            <i class="xi-user-plus"></i>
+                                            [[#{member.join}]]
+                                        </a>
+                                    </span>
+                                </th:block>
                             </div>
                         </div>
                     </div>

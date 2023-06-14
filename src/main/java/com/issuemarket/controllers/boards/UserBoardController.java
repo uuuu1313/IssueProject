@@ -1,11 +1,10 @@
 package com.issuemarket.controllers.boards;
 
 import com.issuemarket.commons.MemberUtil;
+import com.issuemarket.commons.Pagination;
 import com.issuemarket.dto.BoardSearch;
-import com.issuemarket.dto.MemberInfo;
 import com.issuemarket.dto.PostForm;
 import com.issuemarket.entities.Board;
-import com.issuemarket.entities.BoardForm;
 import com.issuemarket.entities.Member;
 import com.issuemarket.entities.Post;
 import com.issuemarket.exception.BoardNotAllowAccessException;
@@ -62,6 +61,12 @@ public class UserBoardController {
         Page<Post> items = postListService.gets(boardSearch, bId, categoryName);
         model.addAttribute("postList", items.getContent());
 
+
+        String url = request.getRequestURI();
+        Pagination pagination = new Pagination(items, url);
+        model.addAttribute("pagination", pagination);
+
+        /**
         int nowPage = items.getPageable().getPageNumber() +1;
         int startPage = Math.max(nowPage - 3, 1);
         int endPage = Math.max(nowPage + 9, items.getTotalPages());
@@ -69,7 +74,7 @@ public class UserBoardController {
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-
+        */
         return "board/list";
     }
 

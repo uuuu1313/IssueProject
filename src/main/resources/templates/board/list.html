@@ -41,6 +41,10 @@
         </div>
     </div>
 
+    <th:block th:replace="~{commons/_pagination::pagination}"></th:block>
+
+
+    <!--
     <div class="paging_wrap">
         <div class="paging_box">
             <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
@@ -50,6 +54,7 @@
             </th:block>
         </div>
     </div>
+    -->
 
     <form name="frmSearch" method="get" th:object="${boardSearch}">
         <div class="sch_btn_wrap">

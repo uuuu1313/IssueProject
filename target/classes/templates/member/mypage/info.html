@@ -5,7 +5,7 @@
 
     <main layout:fragment="basic_content">
         <div class="memberM">
-            <form method="post" name="frmMyPage" autocomplete="off" th:object="${myPageForm}" style="width: 25%;">
+            <form method="post" name="frmMyPage" autocomplete="off" th:object="${memberJoin}" style="width: 25%;">
                 <h1 style="text-align: center;" th:text="${pageTitle}"></h1>
 
                 <br>
@@ -21,16 +21,16 @@
                 <dl>
                     <dt>새 비밀번호</dt>
                     <dd>
-                        <input type="password" name="updatePw" th:field="*{updatePw}" text="">
-                        <div class="errors" th:each="err : ${#fields.errors('updatePw')}" th:text="${err}"></div>
+                        <input type="password" name="userPw" th:field="*{userPw}" text="">
+                        <div class="errors" th:each="err : ${#fields.errors('userPw')}" th:text="${err}"></div>
                     </dd>
                 </dl>
 
                 <dl>
                     <dt>새 비밀번호 확인</dt>
                     <dd>
-                        <input type="password" name="updatePwRe" th:field="*{updatePwRe}">
-                        <div class="errors" th:each="err : ${#fields.errors('updatePwRe')}" th:text="${err}"></div>
+                        <input type="password" name="userPwRe" th:field="*{userPwRe}">
+                        <div class="errors" th:each="err : ${#fields.errors('userPwRe')}" th:text="${err}"></div>
                     </dd>
                 </dl>
 

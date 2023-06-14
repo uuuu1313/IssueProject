@@ -39,9 +39,7 @@ public class MemberController {
         Page<Member> data = listService.gets(search);
         List<Member> items =data.getContent();
         model.addAttribute("items", items);
-
-//        String[] roles = Arrays.stream(Role.values()).map(r->r.toString()).toArray(String[]::new);
-//        model.addAttribute("roles", roles);
+        items.stream().forEach(System.out::println);
 
         return "admin/member/index";
     }
@@ -50,18 +48,15 @@ public class MemberController {
     public String listPs(@ModelAttribute MemberListForm listForm, Model model) {
         commonProcess(model, "회원 관리");
 
+        String script = null;
         try {
             updateService.listUpdate(listForm);
-            String script = String.format("Swal.fire('수정 완료!', '', 'success').then(function() {location.reload();})");
-            model.addAttribute("script", script);
+            script = String.format("parent.Swal.fire('수정 완료!', '', 'success').then(function() { parent.location.reload(); })");
         } catch (Exception e) {
-            e.printStackTrace();
-
-            String script = String.format("Swal.fire('수정할 회원을 선택해주세요!', '', 'error').then(function() {history.go(-1);})");
-            model.addAttribute("script", script);
-
-            return "commons/sweet_script";
+            script = String.format("parent.Swal.fire('%s', '', 'error').then(function() {})", e.getMessage());
         }
+
+        model.addAttribute("script", script);
         return "commons/sweet_script";
     }
 
@@ -79,6 +74,8 @@ public class MemberController {
     @PostMapping("/view/{userNo}")
     public String viewPs(@PathVariable Long userNo, @ModelAttribute MemberJoin memberJoin, Model model) {
         commonProcess(model, "회원 상세 조회");
+
+        model.addAttribute("mypageuno",userNo);
 
         updateService.update(userNo, memberJoin);
 

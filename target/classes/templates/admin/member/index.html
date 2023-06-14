@@ -3,8 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/admin/main}">
 <section layout:fragment="content">
-<!--    <h1 th:text="${title}"></h1>-->
-
     <h2>회원 검색</h2>
     <form method="get" name="frmSearch" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}">
         <table class="table-cols">
@@ -23,10 +21,10 @@
                     <label for="role_ALL">전체</label>
 
                     <input type="radio" th:field="*{role}" value="USER" id="role_USER">
-                    <label for="role_USER">USER</label>
+                    <label for="role_USER">일반</label>
 
                     <input type="radio" th:field="*{role}" value="ADMIN" id="role_ADMIN">
-                    <label for="role_ADMIN">ADMIN</label>
+                    <label for="role_ADMIN">관리자</label>
                 </td>
             </tr>
 
@@ -56,48 +54,47 @@
 
     <h2>회원 목록</h2>
 
-    <form method="post" name="frmMemList" autocomplete="off">
+    <form method="post" th:action="@{/admin/member}" name="frmMemList" autocomplete="off" target="ifrmProcess">
         <table class="table-rows">
             <thead>
-                <tr>
-                    <th>
-                        <input type="checkbox" class="checkall" id="checkall" data-target-name="num">
-                        <label for="checkall"></label>
-                    </th>
-                    <th>회원 번호</th>
-                    <th>권한</th>
-                    <th>아이디</th>
-                    <th>회원명</th>
-                    <th>닉네임</th>
-                    <th>핸드폰 번호</th>
-                    <th>가입 날짜</th>
-                </tr>
+            <tr>
+                <th>
+                    <input type="checkbox" class="checkall" id="checkall" data-target-name="userNo">
+                    <label for="checkall"></label>
+                </th>
+                <th>회원 번호</th>
+                <th>권한</th>
+                <th>아이디</th>
+                <th>회원명</th>
+                <th>닉네임</th>
+                <th>핸드폰 번호</th>
+                <th>가입 날짜</th>
+            </tr>
             </thead>
 
-            <tbody th:each="item, role : ${items}" th:object="${item}">
-                <tr>
-                    <td>
+            <tbody th:each="item, status : ${items}" th:object="${item}">
+            <tr>
+                <td>
                         <span>
-                                <input type="checkbox" name="num" th:value="${role.index}" th:id="${'num_' + role.index}">
-                                <label th:for="${'num_' + role.index}"></label>
+                                <input type="checkbox" name="userNo" th:value="*{userNo}" th:id="${'userNo_' + status.index}">
+                                <label th:for="${'userNo_' + status.index}"></label>
                             </span>
-                        <input type="hidden" name="userNo" th:value="*{userNo}">
-                    </td>
-                    <td th:text="*{userNo}"></td>
-                    <td th:text="*{roles}">
-<!--                        <select name="role">-->
-<!--                            <option value="USER">회원</option>-->
-<!--                            <option value="ADMIN"> &lt;!&ndash;th:selected="*{role.toString() == 'ADMIN'}"&ndash;&gt;관리자</option>-->
-<!--                        </select>-->
-                    </td>
-                    <td class="mId">
-                        <a th:text="*{userId}" th:href="@{/admin/member/view/{userNo}(userNo=*{userNo})}"></a>
-                    </td>
-                    <td th:text="*{userNm}"></td>
-                    <td th:text="*{userNick}"></td>
-                    <td th:text="*{mobile}"></td>
-                    <td th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd')}"></td>
-                </tr>
+                </td>
+                <td th:text="*{userNo}"></td>
+                <td>
+                    <select th:name="*{'roles_' + userNo}">
+                        <option value="USER" th:selected="*{roles.toString() == 'USER'}">일반</option>
+                        <option value="ADMIN" th:selected="*{roles.toString() == 'ADMIN'}">관리자</option>
+                    </select>
+                </td>
+                <td class="mId">
+                    <a th:text="*{userId}" th:href="@{/admin/member/view/{userNo}(userNo=*{userNo})}"></a>
+                </td>
+                <td th:text="*{userNm}"></td>
+                <td th:text="*{userNick}"></td>
+                <td th:text="*{mobile}"></td>
+                <td th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd')}"></td>
+            </tr>
             </tbody>
         </table>
 

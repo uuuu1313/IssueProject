@@ -2,12 +2,14 @@ package com.issuemarket.configs.interceptors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.issuemarket.commons.configs.ConfigInfoService;
+import com.issuemarket.dto.MemberLogin;
 import com.issuemarket.entities.Board;
 import com.issuemarket.repositories.BoardRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.HashMap;
@@ -45,6 +47,14 @@ public class SiteConfigInterceptor implements HandlerInterceptor {
         /** front cate */
         List<Board> boards = boardRepository.findAll();
         request.setAttribute("boards", boards);
+        /** */
+
+        /** front loginForm */
+        MemberLogin memberLogin = new MemberLogin();
+        String mainId = memberLogin.getUserId();
+        String mainPw = memberLogin.getUserPw();
+        request.setAttribute("mainId", mainId);
+        request.setAttribute("mainPw", mainPw);
         /** */
 
         request.setAttribute("siteConfig", siteConfigs);

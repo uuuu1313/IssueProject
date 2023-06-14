@@ -6,8 +6,10 @@ import com.issuemarket.dto.MemberJoin;
 import com.issuemarket.dto.MemberListForm;
 import com.issuemarket.dto.MyPageForm;
 import com.issuemarket.entities.Member;
+import com.issuemarket.exception.CommonException;
 import com.issuemarket.exception.MemberNotFoundException;
 import com.issuemarket.repositories.MemberRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,34 +23,25 @@ public class MemberUpdateService {
 
     private final MemberRepository repository;
     private final PasswordEncoder passwordEncoder;
-
+    private final HttpServletRequest request;
 
     public void listUpdate(MemberListForm memberListForm) {
 
         List<Long> userNos = memberListForm.getUserNo();
-        List<String> roles = memberListForm.getRoles();
-
-        for (int i = 0; i < userNos.size(); i++){
+        if (userNos == null || userNos.isEmpty()) {
+            throw new CommonException("사용자를 선택하세요.");
+        }
+        for (int i = 0; i < userNos.size(); i++) {
             Long userNo = userNos.get(i);
-            Role role = Role.valueOf(roles.get(i));
+            String roleStr = request.getParameter("roles_" + userNo);
+            if (roleStr == null) continue;
+
+            Role role = Role.valueOf(roleStr);
             Member member = repository.findById(userNo).orElse(null);
             member.setRoles(role);
 
             repository.saveAndFlush(member);
         }
-
-//        List<Member> items = new ArrayList<>();
-//        for (int num : nums) {
-//            Long userNo = userNos.get(num);
-//            Role role = Role.valueOf(roles.get(num));
-//            Member item = repository.findById(userNo).orElse(null);
-//            if(item == null) {
-//                continue;
-//            }
-//            item.setRoles(role);
-//            items.add(item);
-//        }
-
     }
 
     public void update(Long userNo, MemberJoin memberJoin) {
@@ -76,17 +69,17 @@ public class MemberUpdateService {
         repository.saveAndFlush(member);
     }
 
-    public void myPageUpdate(Long userNo, MyPageForm myPageForm) {
+    public void myPageUpdate(Long userNo, MemberJoin memberJoin) {
 
         Member member = repository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 
-        String updatePw = myPageForm.getUpdatePw();
-        String updatePwRe = myPageForm.getUpdatePwRe();
-        String updateUserNm = myPageForm.getUserNm();
-        String updateNick = myPageForm.getUserNick();
-        String updateMobile = myPageForm.getMobile();
+        String updatePw = memberJoin.getUserPw();
+        String updatePwRe = memberJoin.getUserPwRe();
+        String updateUserNm = memberJoin.getUserNm();
+        String updateNick = memberJoin.getUserNick();
+        String updateMobile = memberJoin.getMobile();
 
-        if (updatePw.equals(updatePwRe)) {
+        if (updatePw != null && !updatePw.isBlank() && updatePw.equals(updatePwRe)) {
             member.setUserPw(passwordEncoder.encode(updatePw));
         }
 

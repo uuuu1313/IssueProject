@@ -71,8 +71,9 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 
 
 /** header menuBar */
+header { min-width: 1000px; max-width: 1140px; margin: 0 auto; }
 .head_bar { background: #FFB98B; min-width: 1000px; border: 1px solid #FF7E36;  border-width: 1px 0;  align-items: center; }
-.head_bar > .menu_bar { width: 1000px; height: 45px; margin: 0 auto; display:flex; justify-content: space-between;
+.head_bar > .menu_bar { min-width: 1000px; height: 45px; margin: 0 auto; display:flex; justify-content: space-between;
  align-items: center; }
 .head_bar > .menu_bar > .menu_bar_list { float: left; width: 1000px; height: 100%; align-items: center; }
 .head_bar > .menu_bar > .menu_bar_list > li { position:relative; float: left; margin-left: 30px; height: 100%; display: inline-flex; align-items: center;  }
@@ -101,12 +102,12 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 .table-action { padding: 10px 0; border-bottom: 1px solid #d5d5d5; }
 
 /** 메인 프론트 */
-.main_inner { position: relative; margin: 0 auto; width: 1450px; }
-.container { width: 1140px; margin: 20px auto 0; }
-.left_content { width: 840px; float: left; padding-right: 50px; }
-.right_content { float: right; width: 300px; padding-top: 100px; }
-.login_box { position: relative; margin-bottom: 15px; border: 1px solid #FFB98B; background: #fff;}
-.user_info { padding: 0 18px; height: 43px; line-height: 44px; font-size: 14px; color: #FFB98B; }
+.main_inner { position: relative; margin: 0 auto; max-width: 1450px; }
+.container { min-width: 1000px; max-width: 1140px; margin: 20px auto 0; display: flex; }
+.left_content {  flex-grow:1;  margin-right: 50px; padding-left: 10px; }
+.right_content { width: 300px; padding: 30px 10px 0 0; }
+.login_box { position: relative; width: 270px; margin-bottom: 15px; border: 1px solid #FFB98B; background: #fff;}
+.user_info { padding: 10px 18px; line-height: 44px; font-size: 14px; color: #FFB98B; }
 .user_info > a { color: #FF7E36; font-weight: bold; }
 .user_option { height: 36px; line-height: 36px; background: #f3f3f3; text-align: center; clear: both; }
 
@@ -130,5 +131,13 @@ footer { clear: both; position: relative; padding-bottom: 50px; background: #fff
 .issue_hot li, .issue_recom li, .issue_content_list li { position: relative; height: 30px; padding-left: 15px;
 border-bottom: 1px dotted #b1b1b1; display: flex; flex-flow: row wrap; align-items: center; }
 
+
 .issue_content > ul > li > a { width: auto; max-width: 325px; display: inline-block; color: #4e4c4c; font-size: 13px;
  font-weight: bold; text-decoration: none; vertical-align: middle; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+
+/** 페이징 공통 */
+.pagination { text-align: center;  }
+.pagination li { display: inline-block; }
+.pagination a { font-size: 12px; border: 1px solid #dbdbdb; color: #363636; display: block; padding: 5px 10px; }
+.pagination li.on a { background-color: #FF7E36; border-color: #FF7E36; color: #fff; }
