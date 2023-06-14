@@ -53,7 +53,8 @@ public class SecurityConfig {
                 });
 
         http.csrf().ignoringRequestMatchers(new AntPathRequestMatcher("/member/resetpw/**"))
-                .ignoringRequestMatchers(new AntPathRequestMatcher("/admin/member/**"));
+                    .ignoringRequestMatchers(new AntPathRequestMatcher("/admin/member/**"))
+                    .ignoringRequestMatchers(new AntPathRequestMatcher("/member/mypage/**"));
 
         http.headers().frameOptions().sameOrigin();
 

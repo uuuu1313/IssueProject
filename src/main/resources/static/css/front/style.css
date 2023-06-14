@@ -53,6 +53,7 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 .sbtn { display: inline-block; border: 1px solid #FF7E36; color: #FF7E36; min-width: 90px; padding: 0 20px; height: 28px; line-height: 26px; text-align: center; border-radius: 5px; background: #fff; }
 .sbtn.carrot { color: #fff; background: #FF7E36; }
 .sbtn.carrot.member { color: #fff; background: #FF7E36; width: 100% }
+.sbtn.carrot.mypage { color: #fff; background: #FF7E36; width: 100%; margin-top: 15px;}
 
 .search_btn { text-align: center; margin: 20px 0 35px; }
 .search_btn button { text-align: center; height: 45px; line-height: 45px; background: #fff; color: #FF7E36; padding: 0 30px; border: 1px solid #FF7E36; font-size: 16px; cursor:pointer; border-bottom-left-radius: 20px; border-top-right-radius: 20px; }
@@ -64,6 +65,10 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 /** 폼 메뉴 */
 .memberM { display: flex; justify-content: center; margin: 30px 0; }
 .memberM div { margin: 15px 0; }
+
+/** 마이페이지 */
+.memberM dl { margin: 15px 0; }
+
 
 /** header menuBar */
 .head_bar { background: #FFB98B; min-width: 1000px; border: 1px solid #FF7E36;  border-width: 1px 0;  align-items: center; }

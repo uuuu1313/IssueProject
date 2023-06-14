@@ -4,6 +4,7 @@ import com.issuemarket.commons.MemberUtil;
 import com.issuemarket.commons.constants.Role;
 import com.issuemarket.dto.MemberJoin;
 import com.issuemarket.dto.MemberListForm;
+import com.issuemarket.dto.MyPageForm;
 import com.issuemarket.entities.Member;
 import com.issuemarket.exception.MemberNotFoundException;
 import com.issuemarket.repositories.MemberRepository;
@@ -52,26 +53,46 @@ public class MemberUpdateService {
 
     public void update(Long userNo, MemberJoin memberJoin) {
 
-            Member member = repository.findById(userNo).orElseThrow(MemberNotFoundException::new);
+        Member member = repository.findById(userNo).orElseThrow(MemberNotFoundException::new);
+        String nick = memberJoin.getUserNick();
+        String role = memberJoin.getRoles();
 
-            String nick = memberJoin.getUserNick();
-            String role = memberJoin.getRoles();
+        if (nick == null || nick.isBlank()) {
+            member.setUserNick(member.getUserNick());
+        } else {
+            member.setUserNick(nick);
+        }
 
-            if (nick == null || nick.isBlank()) {
-                member.setUserNick(member.getUserNick());
-            } else {
-                member.setUserNick(nick);
-            }
+        member.setRoles(Role.valueOf(role));
 
-            member.setRoles(Role.valueOf(role));
-
-            repository.saveAndFlush(member);
+        repository.saveAndFlush(member);
     }
 
-    public void pwUpdate(Long no, String pw) {
-        Member member = repository.findById(no).orElseThrow(MemberNotFoundException::new);
+    public void pwUpdate(Long userNo, String pw) {
+        Member member = repository.findById(userNo).orElseThrow(MemberNotFoundException::new);
 
         member.setUserPw(passwordEncoder.encode(pw));
+
+        repository.saveAndFlush(member);
+    }
+
+    public void myPageUpdate(Long userNo, MyPageForm myPageForm) {
+
+        Member member = repository.findById(userNo).orElseThrow(MemberNotFoundException::new);
+
+        String updatePw = myPageForm.getUpdatePw();
+        String updatePwRe = myPageForm.getUpdatePwRe();
+        String updateUserNm = myPageForm.getUserNm();
+        String updateNick = myPageForm.getUserNick();
+        String updateMobile = myPageForm.getMobile();
+
+        if (updatePw.equals(updatePwRe)) {
+            member.setUserPw(passwordEncoder.encode(updatePw));
+        }
+
+        member.setUserNm(updateUserNm);
+        member.setUserNick(updateNick);
+        member.setMobile(updateMobile);
 
         repository.saveAndFlush(member);
     }

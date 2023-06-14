@@ -50,8 +50,6 @@ public class MemberController {
     public String listPs(@ModelAttribute MemberListForm listForm, Model model) {
         commonProcess(model, "회원 관리");
 
-
-
         try {
             updateService.listUpdate(listForm);
             String script = String.format("Swal.fire('수정 완료!', '', 'success').then(function() {location.reload();})");

@@ -20,8 +20,6 @@ public class MyPageForm {
 
     private String updatePwRe;
 
-    private String userPwRe;
-
     private String userNm;
 
     private String userNick;
