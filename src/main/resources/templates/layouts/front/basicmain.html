@@ -33,7 +33,9 @@
 
         <div th:replace="~{outlines/front/headerbar::navbar}"></div>
         <div class="main_inner">
-            <div th:replace="~{member/mypage/_side::side}"></div>
+            <th:block sec:authorize="isAuthenticated()"> <!-- 로그인한 상태 -->
+                <div th:replace="~{member/mypage/_side::side}"></div>
+            </th:block>
             <main layout:fragment="basic_content"></main>
         </div>
 

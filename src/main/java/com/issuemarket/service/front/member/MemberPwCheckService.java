@@ -14,7 +14,7 @@ public class MemberPwCheckService {
     private final PasswordEncoder passwordEncoder;
     private final MemberUtil memberUtil;
 
-    public void check(String password) {
+    public boolean check(String password) {
         String getPw = memberUtil.getMember().getUserPw();
 
         boolean matched = passwordEncoder.matches(password, getPw);
@@ -22,5 +22,7 @@ public class MemberPwCheckService {
         if (!matched) {
             throw new CommonException("비밀번호가 일치하지 않습니다.");
         }
+
+        return matched;
     }
 }

@@ -11,6 +11,7 @@ import com.issuemarket.service.admin.member.MemberUpdateService;
 import com.issuemarket.service.front.member.MemberPwCheckService;
 import com.issuemarket.validators.member.JoinValidator;
 import com.issuemarket.validators.member.UpdateValidator;
+import groovy.lang.Script;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -38,16 +39,12 @@ public class MyPageController {
 
     @PostMapping("/pwconfirm")
     public String pwconfirmPs(MemberInfo memberInfo, Model model) {
-
         String userPw = memberInfo.getUserPw();
-
         Long userNo = memberUtil.getMember().getUserNo();
 
         try {
             checkService.check(userPw);
-
             return "redirect:/member/mypage/info/" + userNo;
-
         } catch (Exception e) {
             String script = String.format("Swal.fire('%s', '', 'error').then(function(){history.back();})", e.getMessage());
             model.addAttribute("script", script);
@@ -70,15 +67,11 @@ public class MyPageController {
         }
         try {
             MemberInfo memberInfo = memberUtil.getMember();
-
             MemberJoin memberJoin = new ModelMapper().map(memberInfo, MemberJoin.class);
-
             model.addAttribute("memberJoin", memberJoin);
 
             return "member/mypage/info";
-
         } catch (Exception e) {
-
             return "redirect:/member/login";
         }
     }
@@ -93,23 +86,41 @@ public class MyPageController {
         }
 
         updateService.myPageUpdate(userNo, memberJoin);
-
         String script = String.format("Swal.fire('수정 완료!', '재 로그인시 적용됩니다 :D', 'success').then(function() {history.back();})");
-
         model.addAttribute("script", script);
-
         return "commons/sweet_script";
     }
 
     @GetMapping("/delete/{userNo}")
     public String delete(@PathVariable Long userNo) {
-
         deleteService.delete(userNo);
 
         return "redirect:/member/logout";
     }
 
+    @GetMapping("/deletepw/{userNo}")
+    public String deleteconfirm(@PathVariable Long userNo, @ModelAttribute MemberInfo memberInfo, Model model) {
+        commonProcess(model, "비밀번호 확인");
 
+        return "member/mypage/pwconfirm";
+    }
+
+    @PostMapping("/deletepw/{userNo}")
+    public String deleteconfirmPs(@PathVariable Long userNo, MemberInfo memberInfo, Model model) {
+        String userPw = memberInfo.getUserPw();
+        String url = "/member/mypage/delete/" + userNo;
+        try {
+            if (checkService.check(userPw)) {
+                model.addAttribute("confirmUrl", url);
+                return "commons/sweet_script";
+            }
+        } catch (Exception e) {
+            String script = String.format("Swal.fire('%s', '', 'error').then(function(){history.back();})", e.getMessage());
+            model.addAttribute("script", script);
+            return "commons/sweet_script";
+        }
+        return "redirect:/member/mypage/info/"+userNo;
+    }
 
     private void commonProcess(Model model, String title) {
         model.addAttribute("pageTitle", title);
