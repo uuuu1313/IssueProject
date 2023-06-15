@@ -110,20 +110,41 @@ footer { clear: both; position: relative; padding-bottom: 50px; background: #fff
 /** 메인 탑 */
 .home_top { display: flex; flex-flow: row wrap; justify-content: space-between; }
 .top_list { margin-top: 10px; width: 100%; display: flex; flex-flow: row wrap; justify-content: space-between; }
-.today_issue { width: 395px; }
+.today_issue, .view_split { width: 385px; }
 .issue_list { width: 100%; padding: 8px 12px 8px 17px; border-top: 2px solid #639cea; border-bottom: 2px solid #d1d2d4;
  box-sizing: border-box; display: flex; flex-flow: row wrap; align-items: center; }
 .issue_list > li { margin-right: 30px; text-align: center; font-family: 'Single Day', cursive; font-size: 20px;
  font-weight: bold; color: #e52f2f; }
-.issue_content_area { display: block !important;}
-.issue_content { padding: 0 1px; }
+.issue_content_area, .view_list_content_area { display: block !important;}
+.issue_content, view_list_content { padding: 0 1px; }
 .issue_hot > li { border-bottom: 1px solid #e1e1e1; background-color: #fdf0f0; }
 .issue_recom > li { border-bottom: 1px solid #e1e1e1; background-color: #f0f4fa; }
-.issue_contenst_list > li { position: relative; height: 30px; padding-left: 15px; border-bottom: 1px dotted #b1b1b1;
+.issue_contenst_list > li,
+.view_list_subject { position: relative; height: 30px; padding-left: 15px; border-bottom: 1px dotted #b1b1b1;
  display: flex; flex-flow: row wrap; align-items: center; }
+
+.top_list a:hover,
+ .best_list > li a:hover { color: #1265E2; text-decoration: underline; }
 
 .issue_hot li, .issue_recom li, .issue_content_list li { position: relative; height: 30px; padding-left: 15px;
 border-bottom: 1px dotted #b1b1b1; display: flex; flex-flow: row wrap; align-items: center; }
 
-.issue_content > ul > li > a { width: auto; max-width: 325px; display: inline-block; color: #4e4c4c; font-size: 13px;
+.issue_content > ul > li > a,
+.view_list_subject a { width: auto; max-width: 325px; display: inline-block; color: #4e4c4c; font-size: 13px;
  font-weight: bold; text-decoration: none; vertical-align: middle; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+.view_list_title { height: 45px; font-size: 14px; letter-spacing: -0.05em; display: flex; flex-flow: row wrap; justify-content: space-between;
+ align-items: center; border-bottom: 2px solid #d1d2d4; border-top: 2px solid #639cea; padding: 0 13px; box-sizing: border-box; }
+
+.view_list_title > h2 { font-family: 'Single Day', cursive; font-size: 19px; line-height: 10px; color: #639cea; }
+
+.time_best { margin-top: 30px; }
+.con_head { overflow: hidden; height: 31px; line-height: 20px; border-bottom: 2px solid #FF7E36; padding-top: 1px; }
+.con_head > h2 { font-size: 16px; color: #29367c; font-weight: bold; padding-bottom: 5px; }
+
+.best_list { margin: 0; margin-top: 2px; padding-bottom: 2px; border-bottom: 1px #FFB98B solid; }
+
+.best_list > li:first-child { border-top: none; }
+.best_list > li { position: relative; float: none; border-top: 1px #e4e4e4 solid; padding: 2px 0; }
+.best_list > li a { height: 25px; display: inline-block; max-width: 420px; font-size: 14px; font-weight: bold;
+color: #333; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; margin-left: 10px; line-height: 30px; }
