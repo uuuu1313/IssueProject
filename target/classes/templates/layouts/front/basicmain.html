@@ -34,7 +34,9 @@
         <div th:replace="~{outlines/front/headerbar::navbar}"></div>
         <div class="main_inner">
             <div th:replace="~{member/mypage/_side::side}"></div>
+            <div class="view_wrap">
             <main layout:fragment="basic_content"></main>
+            </div>
         </div>
 
         <footer th:replace="~{outlines/front/footer::common}"></footer>

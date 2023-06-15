@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/tymeleaf/layout"
-      layout:decorate="~{layouts/front/main}">
+      layout:decorate="~{layouts/front/basicmain}">
 
-<main layout:fragment="content">
-    <div class="board_view" th:object="${post}">
-        <div class="subject" th:text="*{subject}"></div>
-        <div class="post_info">
-            <div class="left">
+<main layout:fragment="basic_content" id="container_" th:object="${post}">
+    <section>
+    <div class="view_head" >
+        <div class="view_fr">
+            <div class="view_cate" ></div> <!-- 카테고리 넣을곳 -->
+        </div>
+    </div> <!-- view_head -->
+    <div class="view_content_wrap">
+        <div class="post_wrap">
+            <div class="post_top">
+                <h3 class="post_subject"> <!-- 제목 -->
+                    <span th:text="*{subject}">
                 [[#{board.poster}]] : [[*{poster}]]
-                <th:block th:if="*{member != null}" th:text="*{'(' + member.userId + ')'}"></th:block>
-                / [[#{board.createdAt}]] : [[*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}]]
-            </div>
-            <div class="right">
-                [[#{board.hit}]] :
+                    </span>
+                </h3>
+                <div class="post_info">
+                    <div class="post_info_l">
+                        <span>
+                        <th:block th:if="*{member != null}" th:text="*{'(' + member.userId + ')'}"></th:block>
+                        <th:block th:unless="*{member != null}" th:text="*{poster}"></th:block>
+                        </span>
+                        <span>
+                            | IP : [[*{ip}]]
+                        </span>
+                        <span>
+                            | [[#{board.createdAt}]] : [[*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}]]
+                        </span>
+                    </div>
+                    <div class="post_info_r">
+                        <span>
+                            [[#{board.hit}]] :
                 <th:block th:if="*{hit < 1000}" th:text="*{hit}"></th:block>
                 <th:block th:unless="*{hit < 1000}" th:text="*{#numbers.formatInteger(hit, 3)}"></th:block>
-                / IP : [[*{ip}]]
+                        </span>
+                        <span>
+                            | 좋아요 1
+                        </span>
+                    </div>
+                </div> <!-- post_info -->
             </div>
-        </div> <!-- post_info -->
+            <div class="right">
+
+            </div>
+        </div> <!-- post_wrap -->
         <div class="content" th:utext="*{content}"></div>
         <div class="btns">
             <a th:href="@{/board/update/{id}(id=*{id})}" th:text="#{board.update}"></a>
@@ -27,7 +55,7 @@
             <a th:if="${board.useReply == true}" th:href="@{/board/reply/(id=*{id})}" th:text="#{board.reply}"></a>
             <a th:href="@{/board/list/{bId}(bId=*{board.bId})}" th:text="#{board.list}"></a>
         </div>
-    </div> <!-- board_view -->
-
+    </div> <!-- view_content_wrap -->
+    </section>
 </main>
 </html>

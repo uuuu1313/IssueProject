@@ -27,6 +27,7 @@ public class BoardForm {
 
     private boolean showViewList; // 게시글 하단 목록
 
+    @NotBlank
     private String category; // 카테고리 분류
 
     /** 접근 권한 */
