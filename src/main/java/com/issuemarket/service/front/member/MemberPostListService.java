@@ -27,8 +27,7 @@ public class MemberPostListService {
         int pageSize = boardSearch.getPageSize();
 
         page = page < 1 ? 1 : page;
-//        pageSize = pageSize < 1 ? 20 : pageSize;
-        pageSize = 3;
+        pageSize = pageSize < 1 ? 20 : pageSize;
         builder.and(post.member.userNo.eq(userNo));
 
         String sopt = boardSearch.getSopt();
