@@ -1,23 +1,36 @@
 package com.issuemarket.controllers.members;
 
 import com.issuemarket.commons.MemberUtil;
+import com.issuemarket.dto.BoardSearch;
 import com.issuemarket.dto.MemberInfo;
 import com.issuemarket.dto.MemberJoin;
 import com.issuemarket.dto.MyPageForm;
+import com.issuemarket.entities.Board;
 import com.issuemarket.entities.Member;
+import com.issuemarket.entities.Post;
 import com.issuemarket.repositories.MemberRepository;
 import com.issuemarket.service.admin.member.MemberDeleteService;
 import com.issuemarket.service.admin.member.MemberUpdateService;
+import com.issuemarket.service.front.member.MemberPostListService;
 import com.issuemarket.service.front.member.MemberPwCheckService;
 import com.issuemarket.validators.member.JoinValidator;
 import com.issuemarket.validators.member.UpdateValidator;
 import groovy.lang.Script;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @Controller
 @RequestMapping("/member/mypage")
@@ -29,6 +42,7 @@ public class MyPageController {
     private final UpdateValidator updateValidator;
     private final MemberPwCheckService checkService;
     private final MemberDeleteService deleteService;
+    private final MemberPostListService postListService;
 
     @GetMapping("/pwconfirm")
     public String pwconfirm(@ModelAttribute MemberInfo memberInfo, Model model) {
@@ -122,8 +136,31 @@ public class MyPageController {
         return "redirect:/member/mypage/info/"+userNo;
     }
 
+    @GetMapping("/mypost/{userNo}")
+    public String mypost(@PathVariable Long userNo, @ModelAttribute BoardSearch boardSearch, Model model) {
+        commonProcess(model, "내가 쓴 게시글");
+
+        Page<Post> posts = postListService.gets(boardSearch, userNo);
+        List<Post> postList = posts.getContent();
+
+        int nowPage = posts.getPageable().getPageNumber() + 1;
+        int startPage = Math.max(nowPage - 4, 1);
+        int endPage = Math.min(nowPage + 5, posts.getTotalPages());
+
+        model.addAttribute("postList", postList);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        return "member/mypage/mypost";
+    }
+
     private void commonProcess(Model model, String title) {
         model.addAttribute("pageTitle", title);
         model.addAttribute("title", title);
+
+        List<String> addCss = new ArrayList<>();
+        addCss.add("board/style");
+        model.addAttribute("addCss", addCss);
     }
 }

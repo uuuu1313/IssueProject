@@ -195,6 +195,7 @@ public class UserBoardController {
 
         model.addAttribute("board", board); // 게시판 설정
         model.addAttribute("addCss", addCss);
+
         model.addAttribute("addScript", addScript);
     }
 

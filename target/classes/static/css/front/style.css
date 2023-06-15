@@ -68,6 +68,9 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 .memberM { display: flex; justify-content: center; margin: 30px 0; }
 .memberM div { margin: 15px 0; }
 
+.memberP { display: flex; justify-content: center; margin: 30px 0; min-height: 400px; }
+.memberwrap { text-align: center; }
+
 /** 마이페이지 */
 .memberM dl { margin: 15px 0; }
 
@@ -111,10 +114,14 @@ header { min-width: 1000px; max-width: 1400px; margin: 0 auto; }
 .table-action { padding: 10px 0; border-bottom: 1px solid #d5d5d5; }
 
 /** 페이징 공통 */
-.pagination { text-align: center;  }
-.pagination li { display: inline-block; }
-.pagination a { font-size: 12px; border: 1px solid #dbdbdb; color: #363636; display: block; padding: 5px 10px; }
-.pagination li.on a { background-color: #FF7E36; border-color: #FF7E36; color: #fff; }
+.pagination, .mypostpg { text-align: center; }
+.pagination li, .page { display: inline-block; }
+.pagination a,
+.page a,
+.page strong  { font-size: 12px; border: 1px solid #dbdbdb; color: #363636; display: block; padding: 5px 10px; }
+.pagination li.on a, .page.on a { background-color: #FF7E36; border-color: #FF7E36; color: #fff; }
+.page.on strong { background-color: #FF7E36; color: black; }
+
 
 /** 메인 프론트 */
 .main_inner { position: relative; margin: 0 auto; max-width: 1450px; }
