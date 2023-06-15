@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="side">
+        <div class="menu_slide" id="jsMenu">
+            <h1>마이페이지</h1>
+            <ul class="menu_list">
+                <li class="list_item">
+                    <a th:href="@{/member/mypage/pwconfirm}">
+                        내 정보 수정
+                    </a>
+                </li>
+                <li class="list_item">
+                    <a th:href="@{/member/mypage/mypost}">
+                        내가 작성한 글
+                    </a>
+                </li>
+                <li class="list_item">
+                    <a th:href="@{/member/mypage/delete/{userNo}(userNo=*{userNo})}" onclick="return confirm('정말 탈퇴 하시겠습니까?');">
+                        탈퇴하기
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</html>

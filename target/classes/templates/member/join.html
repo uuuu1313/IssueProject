@@ -46,11 +46,11 @@
                 </div>
 
                 <div>
-                    <input type="text" name="zipcode" id="zipcode1" th:field="*{zipcode}" readonly>
                     <button type="button" class="search_address" data-address-id="address1" data-zipcode-id="zipcode1">주소 찾기</button>
+                    <input type="text" name="zipcode" id="zipcode1" th:field="*{zipcode}" readonly>
 
                     <input type="text" name="address" id="address1" th:field="*{address}" readonly>
-                    <input type="text" name="addressSub" th:field="*{addressSub}">
+                    <input type="text" name="addressSub" th:field="*{addressSub}" placeholder="상세 주소를 입력해주세요!">
                 </div>
 
                 <div>

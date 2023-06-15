@@ -1,4 +1,3 @@
-
 window.addEventListener("DOMContentLoaded", function() {
     /** 전체 선택 토글 처리 */
     const chkAlls = document.getElementsByClassName("checkall");

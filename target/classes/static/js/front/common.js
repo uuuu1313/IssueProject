@@ -30,4 +30,32 @@ window.addEventListener("DOMContentLoaded", function() {
             }).open();
         });
     }
+    /* 주소 찾기 팝업 완료 */
+
+    /* 마이페이지 사이드바 S */
+    const menu = document.getElementById("jsMenu");
+
+    function slideDown() {
+        menu.style.left="-300px";
+    }
+
+    function slideUp() {
+        menu.style.left="-60px";
+    }
+
+    function handleMouseMove(event) {
+        let clientX = event.clientX;
+
+        if (clientX >= 0 && clientX <= 10) {
+            slideUp();
+        } else if (clientX > 300) {
+            slideDown();
+        }
+    }
+
+    function init() {
+        document.addEventListener("mousemove", handleMouseMove);
+    }
+    init();
+    /* 마이페이지 사이드바 E */
 });

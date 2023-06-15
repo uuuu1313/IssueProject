@@ -59,6 +59,8 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 .search_btn button { text-align: center; height: 45px; line-height: 45px; background: #fff; color: #FF7E36; padding: 0 30px; border: 1px solid #FF7E36; font-size: 16px; cursor:pointer; border-bottom-left-radius: 20px; border-top-right-radius: 20px; }
 .search_btn button:hover { font-weight: bold; text-decoration: underline; }
 
+.search_address { display: inline-block; border: 1px solid #FF7E36; color: #fff; background: #FF7E36; min-width: 90px; padding: 0 20px; height: 23px; line-height: 23px; text-align: center; border-radius: 5px; margin-bottom: 10px; }
+
 /** 에러 메세지 스타일 */
 .errors { box-shadow: 2px 2px 5px #36466d; padding: 5px 15px; background: #fff; font-size: 12px; border-radius: 3px; margin-top: 5px; color: #61729e; }
 
@@ -69,9 +71,16 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 /** 마이페이지 */
 .memberM dl { margin: 15px 0; }
 
+/** 마이페이지 side */
+.menu_slide { display: flex; align-items: center; flex-direction: column; position: absolute; width: 250px; height: 100%; left: -300px; transition: 0.3s; border: 1px solid #FF7E36; border-radius: 20px; padding: 5px; }
+.menu_slide h1 { text-align: center; line-height: 80px; margin: 0; border-bottom: 1px solid #FF7E36;  }
+.menu_slide .menu_list { width: 100%; padding: 30px 0; }
+.menu_slide .menu_list .list_item {  font-weight: bold; margin-bottom: 30px; text-align: center; }
+.menu_slide .menu_list .list_item > a { font-family: 'Single Day', cursive; font-size: 25px; }
+.menu_slide .menu_list .list_item:last-child { margin-bottom: 0; }
 
 /** header menuBar */
-header { min-width: 1000px; max-width: 1140px; margin: 0 auto; }
+header { min-width: 1000px; max-width: 1400px; margin: 0 auto; }
 .head_bar { background: #FFB98B; min-width: 1000px; border: 1px solid #FF7E36;  border-width: 1px 0;  align-items: center; }
 .head_bar > .menu_bar { min-width: 1000px; height: 45px; margin: 0 auto; display:flex; justify-content: space-between;
  align-items: center; }

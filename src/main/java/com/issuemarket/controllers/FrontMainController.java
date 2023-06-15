@@ -21,16 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FrontMainController {
 
-
-    private final MemberUtil memberUtil;
-
     @GetMapping
-    public String main(@AuthenticationPrincipal MemberInfo memberInfo, Model model) {
-
-        if (memberUtil.isLogin()) {
-            Long userNo = memberInfo.getUserNo();
-            model.addAttribute("mypageuno", userNo);
-        }
+    public String main() {
 
         return "front/index";
     }

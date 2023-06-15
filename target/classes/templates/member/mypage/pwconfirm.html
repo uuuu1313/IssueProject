@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/front/pwcheck}">
+
+<main layout:fragment="pw_content">
+    <div class="memberM">
+        <form method="post" name="frmMyPage" autocomplete="off" th:object="${memberInfo}" style="width: 25%;">
+            <h1 style="text-align: center;" th:text="${pageTitle}"></h1>
+            <br>
+            <dl>
+                <dt th:text="#{userPw}" style="width: 20%;"></dt>
+                <dd>
+                    <input type="password" name="userPw" th:field="*{userPw}" style="width: 125%;">
+                    <div class="errors" th:each="err : ${#fields.errors('userPw')}" th:text="${err}"></div>
+                </dd>
+            </dl>
+
+            <button type="submit" class="sbtn carrot mypage">확인</button>
+        </form>
+    </div>
+</main>
+</html>
