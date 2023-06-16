@@ -1,5 +1,5 @@
 ## Community project
-![header](https://capsule-render.vercel.app/api?type=waving&animation=fadeIn&color=gradient&customColorList=27&height=200&section=header&text=%20community&fontColor=ffffff&fontSize=30&fontAlign=60&fontAlignY=35&desc=Team,Name🐱%20We're&ddescSize=20&descAlign=37&descAlignY=35)
+![header](https://capsule-render.vercel.app/api?type=waving&animation=fadeIn&color=gradient&customColorList=27&height=200&section=header&text=%20community&fontColor=ffffff&fontSize=30&fontAlign=60&fontAlignY=35&desc=Team,Issue🐱%20We're&ddescSize=20&descAlign=37&descAlignY=35)
 
 ### 프로젝트명
 Market !!
@@ -19,25 +19,26 @@ Market !!
 ### 📌프로젝트 주요 기능
 
 1) 회원가입 / 로그인
-- (개인/관리자)
-- 마이페이지 (회원 정보수정)
-- 내가 쓴글
-- 회원 탈퇴
-- 아이디, 비밀번호 찾기
+   - (개인/관리자)
+   - 마이페이지 (회원 정보수정) : 비밀번호 확인 후 접근
+     - 내가 쓴 글 조회
+     - 회원 탈퇴
+     - 아이디, 비밀번호 찾기
 
 2) 자유게시판
-- 게시글 작성
-- 조회
-- 삭제
+   - 게시글 작성
+   - 조회 ( 수정 가능, 조회수 구현 )
+   - 삭제
 
 3) 거래 게시판
 
 4) 문의 게시판
 
 5) 관리자
-- 게시판, 카테고리 생성
-- 게시판 별 권한 설정
-- 회원 정보 관리
+   - 사이트 설정 페이지
+   - 게시판, 카테고리 생성
+   - 게시판 별 권한 설정
+   - 회원 정보 관리 : 회원 권한 수정, 탈퇴 가능
 
 ### 📌 기술 사용
 
