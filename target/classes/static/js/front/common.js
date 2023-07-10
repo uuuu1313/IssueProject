@@ -36,11 +36,11 @@ window.addEventListener("DOMContentLoaded", function() {
     const menu = document.getElementById("jsMenu");
 
     function slideDown() {
-        menu.style.left="-300px";
+        menu.style.left="-350px";
     }
 
     function slideUp() {
-        menu.style.left="-60px";
+        menu.style.left="-100px";
     }
 
     function handleMouseMove(event) {
